@@ -151,7 +151,30 @@ class BladeCompiler extends Compiler implements CompilerInterface
                     .PHP_EOL.implode(PHP_EOL, array_reverse($this->footer));
         }
 
+        if( env('LARAVEL_VIEW_COMPRESS', false) ){
+            $result = $this->stripWhitespace($result);
+        }
+
         return $result;
+    }
+
+    /**
+     * Strip the unneeded whitespace of the template
+     * @param string $str
+     * @return string
+     */
+    private function stripWhitespace($str){
+        $search = array(
+            '/\>[^\S ]+/s',
+            '/[^\S ]+\</s',
+            '/(\s)+/s'
+        );
+        $replace = array(
+            '>',
+            '<',
+            '\\1'
+        );
+        return preg_replace($search, $replace, $str) . PHP_EOL;
     }
 
     /**
