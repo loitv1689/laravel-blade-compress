@@ -11,3 +11,14 @@ This incursive code will compress html at compile time, benifit form the laravel
 ```
 sh -c "$(wget https://raw.githubusercontent.com/wangyuzju/laravel-blade-compress/master/install.sh -O -)"
 ```
+
+## Usage
+
+add `LARAVEL_VIEW_COMPRESS=true` into your laravel project configuration file (`.env`), then run `php artisan view:clear`
+command to clear cached views, then you will see the html has been compressed.
+
+
+## Benefit
+
+The size of compressed file will be about 10% smaller compared to the original file when both gzipped.
+
